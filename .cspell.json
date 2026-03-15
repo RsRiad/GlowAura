@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "inngest",
+    "clerk",
+    "clerkuser",
+    "prisma",
+    "turbopack",
+    "tailwindcss",
+    "lucide",
+    "recharts",
+    "glowaura",
+    "neon"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    ".next",
+    ".git"
+  ]
+}
