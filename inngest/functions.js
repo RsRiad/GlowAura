@@ -7,16 +7,15 @@ export const syncUserCreation = inngest.createFunction(
     async ({ event, step }) => {
         const { data } = event;
         const { id, email_addresses, first_name, last_name, image_url } = data;        
-        const email = email_addresses[0].email_address;
-        const name = `${first_name} ${last_name}`;
-        const image = image_url;
-        await prisma.user.create({
-            data: {
-                id,
-                email,
-                name,
-                image,
-            },
+        
+        const email = email_addresses?.[0]?.email_address;
+        const name = (first_name || last_name) ? `${first_name || ""} ${last_name || ""}`.trim() : "User";
+        const image = image_url || "";
+
+        await prisma.user.upsert({
+            where: { id },
+            update: { email, name, image },
+            create: { id, email, name, image },
         });
     },
 );
@@ -27,18 +26,15 @@ export const syncUserUpdate = inngest.createFunction(
     async ({ event, step }) => {
         const { data } = event;
         const { id, email_addresses, first_name, last_name, image_url } = data;
-        const email = email_addresses[0].email_address;
-        const name = `${first_name} ${last_name}`;
-        const image = image_url;
-        await prisma.user.update({
-            where: {
-                id,
-            },
-            data: {
-                email,
-                name,
-                image,
-            },
+        
+        const email = email_addresses?.[0]?.email_address;
+        const name = (first_name || last_name) ? `${first_name || ""} ${last_name || ""}`.trim() : "User";
+        const image = image_url || "";
+
+        await prisma.user.upsert({
+            where: { id },
+            update: { email, name, image },
+            create: { id, email, name, image },
         });
     },
 );
@@ -49,10 +45,11 @@ export const syncUserDelete = inngest.createFunction(
     async ({ event, step }) => {
         const { data } = event;
         const { id } = data;
+        
+        if (!id) return;
+
         await prisma.user.delete({
-            where: {
-                id,
-            },
+            where: { id },
         });
     },
 );
