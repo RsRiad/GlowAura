@@ -6,16 +6,20 @@ export const syncUserCreation = inngest.createFunction(
     { event: "clerk/user.created" },
     async ({ event, step }) => {
         const { data } = event;
-        const { id, email_addresses, first_name, last_name, image_url } = data;        
-        
-        const email = email_addresses?.[0]?.email_address;
-        const name = (first_name || last_name) ? `${first_name || ""} ${last_name || ""}`.trim() : "User";
-        const image = image_url || "";
+        const { id, email_addresses, first_name, last_name, image_url } = data;
 
-        await prisma.user.upsert({
-            where: { id },
-            update: { email, name, image },
-            create: { id, email, name, image },
+        await step.run("save-user-to-db", async () => {
+            const email = email_addresses?.[0]?.email_address;
+            const name = (first_name || last_name)
+                ? `${first_name || ""} ${last_name || ""}`.trim()
+                : "User";
+            const image = image_url || "";
+
+            await prisma.user.upsert({
+                where: { id },
+                update: { email, name, image },
+                create: { id, email, name, image },
+            });
         });
     },
 );
@@ -26,15 +30,19 @@ export const syncUserUpdate = inngest.createFunction(
     async ({ event, step }) => {
         const { data } = event;
         const { id, email_addresses, first_name, last_name, image_url } = data;
-        
-        const email = email_addresses?.[0]?.email_address;
-        const name = (first_name || last_name) ? `${first_name || ""} ${last_name || ""}`.trim() : "User";
-        const image = image_url || "";
 
-        await prisma.user.upsert({
-            where: { id },
-            update: { email, name, image },
-            create: { id, email, name, image },
+        await step.run("update-user-in-db", async () => {
+            const email = email_addresses?.[0]?.email_address;
+            const name = (first_name || last_name)
+                ? `${first_name || ""} ${last_name || ""}`.trim()
+                : "User";
+            const image = image_url || "";
+
+            await prisma.user.upsert({
+                where: { id },
+                update: { email, name, image },
+                create: { id, email, name, image },
+            });
         });
     },
 );
@@ -45,11 +53,13 @@ export const syncUserDelete = inngest.createFunction(
     async ({ event, step }) => {
         const { data } = event;
         const { id } = data;
-        
+
         if (!id) return;
 
-        await prisma.user.delete({
-            where: { id },
+        await step.run("delete-user-from-db", async () => {
+            await prisma.user.delete({
+                where: { id },
+            });
         });
     },
 );
