@@ -9,7 +9,6 @@ export async function POST(req) {
         return new Response("Server misconfigured", { status: 500 });
     }
 
-    // Get the headers
     const svix_id = req.headers.get("svix-id");
     const svix_timestamp = req.headers.get("svix-timestamp");
     const svix_signature = req.headers.get("svix-signature");
@@ -18,10 +17,8 @@ export async function POST(req) {
         return new Response("Missing svix headers", { status: 400 });
     }
 
-    // Get the raw body
     const body = await req.text();
 
-    // Verify webhook signature
     const wh = new Webhook(CLERK_WEBHOOK_SECRET);
     let payload;
 
@@ -36,7 +33,6 @@ export async function POST(req) {
         return new Response("Invalid webhook signature", { status: 400 });
     }
 
-    // Map Clerk webhook type to Inngest event name
     const { type, data } = payload;
 
     const eventMap = {
@@ -48,15 +44,16 @@ export async function POST(req) {
     const eventName = eventMap[type];
 
     if (!eventName) {
-        // Not an event we care about — return success so Clerk stops retrying
         return new Response("Event ignored", { status: 200 });
     }
 
-    // Send the event to Inngest
-    await inngest.send({
-        name: eventName,
-        data,
-    });
+    try {
+        await inngest.send({ name: eventName, data });
+        console.log(`✅ Sent ${eventName} to Inngest`);
+    } catch (err) {
+        console.error(`❌ Failed to send event to Inngest:`, err.message);
+        return new Response("Failed to send to Inngest", { status: 500 });
+    }
 
     return new Response("OK", { status: 200 });
 }
