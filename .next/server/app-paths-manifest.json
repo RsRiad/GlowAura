@@ -1,5 +1,0 @@
-{
-  "/(public)/create-store/page": "app/(public)/create-store/page.js",
-  "/(public)/page": "app/(public)/page.js",
-  "/api/store/create/route": "app/api/store/create/route.js"
-}
