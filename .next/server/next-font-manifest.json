@@ -1,7 +1,13 @@
 {
   "app": {
+    "[project]/app/(public)/create-store/page": [
+      "static/media/1b99372b3eaef0c8-s.p.758e15a8.woff2"
+    ],
     "[project]/app/(public)/page": [
-      "static/media/QGYvz_MVcBeNP4NJtEtqUYLknw-s.p.07dd827d.woff2"
+      "static/media/1b99372b3eaef0c8-s.p.758e15a8.woff2"
+    ],
+    "[project]/app/store/page": [
+      "static/media/1b99372b3eaef0c8-s.p.758e15a8.woff2"
     ]
   },
   "appUsingSizeAdjust": true,

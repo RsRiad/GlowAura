@@ -4,8 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import Loading from "@/components/Loading";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
+import axios from "axios";
 
 export default function CreateStore() {
+
+  const {user} = useUser();
+  const router = useRouter();
+  const {getToken} = useAuth();
+
+
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
@@ -27,18 +37,93 @@ export default function CreateStore() {
 
   const fetchSellerStatus = async () => {
     // Logic to check if the store is already submitted
-
+    const token = await getToken();
+    try {
+      const {data} = await axios.get('/api/store/create', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+        
+      });
+      if(['approved', 'rejected', 'pending'].includes(data.status)){
+          setAlreadySubmitted(true);
+          setStatus(data.status);
+          switch(data.status){
+            case "approved":
+              setMessage("Your store has been approved, you can now add products")
+              setTimeout(() => {
+                router.push("/store");
+              }, 5000);
+              break;
+            case "rejected":
+              setMessage("Your store has been rejected, contact admin for more information")
+              // setTimeout(() => {
+              //   router.push("/store");
+              // }, 5000);
+              break;
+            case "pending":
+              setMessage("Your store is pending, admin will review it soon")
+              // setTimeout(() => {
+              //   router.push("/store");
+              // }, 5000);
+              break;
+          }
+        }
+        else{
+          setAlreadySubmitted(false);
+        }
+      
+    }
+    catch(error){
+      toast.error(error?.response?.data?.error || error.message);
+    }
     setLoading(false);
   };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     // Logic to submit the store details
+    if(!user){
+      return toast.error("Please login to create a store");
+    }
+    try {
+      const token = await getToken();
+      const formData = new FormData();
+      formData.append("name", storeInfo.name);
+      formData.append("userName", storeInfo.username);
+      formData.append("description", storeInfo.description);
+      formData.append("email", storeInfo.email);
+      formData.append("contact", storeInfo.contact);
+      formData.append("address", storeInfo.address);
+      formData.append("image", storeInfo.image);
+
+      const {data} = await axios.post('/api/store/create', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`
+        }
+      });
+      toast.success(data.message);
+      await fetchSellerStatus();
+    } catch (error) {
+      toast.error(error?.response?.data?.error || error.message);
+    }
   };
 
   useEffect(() => {
-    fetchSellerStatus();
-  }, []);
+    if(user){
+      fetchSellerStatus();
+    }
+
+  }, [user]);
+
+  if(!user){
+    return (
+      <div className="min-h-[80vh] flex flex-col items-center justify-center text-slate-400">
+        <p className="text-2xl font-semibold text-slate-500">Please <span className="text-slate-500 font-medium">login</span> to create a store</p>
+      </div>
+    )
+  }
 
   return !loading ? (
     <>
