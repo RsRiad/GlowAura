@@ -5,9 +5,10 @@ import { HomeIcon, ShieldCheckIcon, StoreIcon, TicketPercentIcon } from "lucide-
 import Image from "next/image"
 import Link from "next/link"
 import { assets } from "@/assets/assets"
+import { useUser } from "@clerk/nextjs"
 
 const AdminSidebar = () => {
-
+    const { user } = useUser();
     const pathname = usePathname()
 
     const sidebarLinks = [
@@ -21,9 +22,9 @@ const AdminSidebar = () => {
         <div className="inline-flex h-full flex-col gap-5 border-r border-rose-100 bg-white/50 sm:min-w-64">
             <div className="flex flex-col gap-3 justify-center items-center pt-10 max-sm:hidden">
                 <div className="relative p-1 bg-gradient-to-tr from-rose-200 to-rose-400 rounded-full shadow-lg shadow-rose-900/5">
-                    <Image className="w-16 h-16 rounded-full border-2 border-white bg-rose-50 p-2" src={assets.gs_logo} alt="" width={100} height={100} />
+                    <Image className="w-16 h-16 rounded-full border-2 border-white bg-rose-50 p-2" src={user.imageUrl} alt="" width={100} height={100} />
                 </div>
-                <p className="text-slate-800 font-bold italic tracking-tight">System Admin</p>
+                <p className="text-slate-800 font-bold italic tracking-tight">{user.fullName}</p>
             </div>
 
             <div className="max-sm:mt-8 px-4">

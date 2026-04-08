@@ -23,7 +23,7 @@ export async function GET(req) {
       },
     });
     const totalRevenue = allOrders.reduce(
-      (acc, order) => acc + order.totalAmount,
+      (acc, order) => acc + order.total,
       0,
     );
     let revenue = totalRevenue.toFixed(2);

@@ -11,7 +11,9 @@
     "lucide",
     "recharts",
     "glowaura",
-    "neon"
+    "neon",
+    "cupon",
+    "cupons"
   ],
   "ignorePaths": [
     "node_modules",

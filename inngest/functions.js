@@ -82,3 +82,22 @@ export const syncUserDelete = inngest.createFunction(
         });
     }
 );
+
+// function for delete cupon after expiry date
+export const deleteExpiredCoupons = inngest.createFunction(
+    { id: "delete-cupon-on-expiry" },
+    { event: "app/cupon.expired" },
+    async ({ event, step }) => {
+        const { data } = event;
+        const expiryDate = new Date(data.expires_at);
+        const { couponId } = data;
+        await step.sleepUntil("wait-for-expiry", expiryDate);
+        await step.run("delete-cupon-on-expiry", async () => {
+            await prisma.coupon.delete({
+                where: {
+                    code: data.code
+                }
+            });
+        });
+    }
+);

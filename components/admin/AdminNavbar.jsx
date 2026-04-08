@@ -1,7 +1,9 @@
 'use client'
 import Link from "next/link"
+import { useUser, UserButton } from "@clerk/nextjs"
 
 const AdminNavbar = () => {
+    const { user } = useUser();
 
 
     return (
@@ -14,7 +16,8 @@ const AdminNavbar = () => {
             </Link>
             <div className="flex items-center gap-3 text-slate-500 font-black uppercase tracking-[0.15em] text-[10px]">
                 <p className="px-4 py-2 bg-rose-50 text-rose-600 rounded-full border border-rose-100 italic lowercase tracking-tight font-medium text-xs">system controller</p>
-                <p className="px-4 py-2 border border-slate-200 rounded-full">Hi, Admin</p>
+                <p className="px-4 py-2 border border-slate-200 rounded-full">Hi, {user?.firstName}</p>
+                <UserButton />
             </div>
         </div>
     )
