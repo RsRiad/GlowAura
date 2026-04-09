@@ -1,5 +1,6 @@
 import { inngest } from "./client";
 import { neon } from "@neondatabase/serverless";
+import prisma from "@/lib/prisma";
 
 // Use Neon HTTP driver — works in ALL serverless environments, no WebSocket needed
 function getSql() {
@@ -86,12 +87,13 @@ export const syncUserDelete = inngest.createFunction(
 // function for delete cupon after expiry date
 export const deleteExpiredCoupons = inngest.createFunction(
     { id: "delete-cupon-on-expiry" },
-    { event: "app/cupon.expired" },
+    { event: "app/delete-expired-cupon" },
     async ({ event, step }) => {
         const { data } = event;
         const expiryDate = new Date(data.expires_at);
-        const { couponId } = data;
+        
         await step.sleepUntil("wait-for-expiry", expiryDate);
+        
         await step.run("delete-cupon-on-expiry", async () => {
             await prisma.coupon.delete({
                 where: {
