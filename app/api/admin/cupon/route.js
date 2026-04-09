@@ -25,7 +25,7 @@ export async function POST(req) {
             await inngest.send({
                 name: "app/delete-expired-cupon",
                 data: {
-                    expires_at: coupon.expires_at,
+                    expiresAt: coupon.expiresAt,
                     code: coupon.code,
                 }
             })

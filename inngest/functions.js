@@ -90,7 +90,11 @@ export const deleteExpiredCoupons = inngest.createFunction(
     { event: "app/delete-expired-cupon" },
     async ({ event, step }) => {
         const { data } = event;
-        const expiryDate = new Date(data.expires_at);
+        const expiryDate = new Date(data.expiresAt);
+
+        if (isNaN(expiryDate.getTime())) {
+            return;
+        }
         
         await step.sleepUntil("wait-for-expiry", expiryDate);
         
