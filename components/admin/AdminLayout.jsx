@@ -37,8 +37,11 @@ const AdminLayout = ({ children }) => {
     }
 
     useEffect(() => {
-        if(user){
+        if (user) {
             fetchIsAdmin()
+        } else {
+            setIsAdmin(false)
+            setLoading(false)
         }
     }, [user])
 

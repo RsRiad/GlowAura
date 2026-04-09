@@ -4,8 +4,9 @@ const isPublicRoute = createRouteMatcher([
   '/',
   '/sign-in(.*)',
   '/sign-up(.*)',
+  '/store(.*)',          // Auth handled client-side in StoreLayout
   '/api/webhooks(.*)',   // Allow Clerk webhooks through without auth
-  '/api/inngest(.*)',   // Allow Inngest through without auth
+  '/api/inngest(.*)',    // Allow Inngest through without auth
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

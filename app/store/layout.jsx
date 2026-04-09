@@ -7,8 +7,6 @@ export const metadata = {
 
 export default function RootAdminLayout({ children }) {
   return (
-    <>
-      <StoreLayout>{children}</StoreLayout>
-    </>
+    <StoreLayout>{children}</StoreLayout>
   );
 }
