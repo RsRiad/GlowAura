@@ -9,6 +9,10 @@ export async function GET(req){
     try{
         const {userId} = getAuth(req);
         const storeId = await authSeller(userId);
+
+        if (!storeId) {
+            return NextResponse.json({ error: "Unauthorized or store not approved" }, { status: 401 });
+        }
         //get all orders of the seller
         const orders = await prisma.order.findMany({
             where:{
@@ -26,19 +30,19 @@ export async function GET(req){
             where:{
                 productId: {
                     in: products.map((product) => product.id)
-                },
-                include:{
-                    product: true,
-                    user: true
                 }
+            },
+            include:{
+                product: true,
+                user: true
             }
         })
 
         const dashboardData = {
-            totalOrder: orders.length,
-            totalEarning: orders.reduce((acc, order) => acc + order.totalAmount, 0),
+            totalOrders: orders.length,
+            totalEarnings: orders.reduce((acc, order) => acc + order.totalAmount, 0),
             totalProducts: products.length,
-            rating: rating
+            ratings: rating
         }
         return NextResponse.json({success: true, dashboardData: dashboardData}, {status:200})
     

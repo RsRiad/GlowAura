@@ -3,9 +3,17 @@ import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import Image from "next/image"
 import Loading from "@/components/Loading"
-import { productDummyData } from "@/assets/assets"
+import { useAuth, useUser } from "@clerk/nextjs"
+import { useRouter } from "next/navigation"
 
 export default function StoreManageProducts() {
+
+
+    const { getToken } = useAuth()
+    const { user } = useUser()
+    const router = useRouter()
+
+
 
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
@@ -13,14 +21,51 @@ export default function StoreManageProducts() {
     const [products, setProducts] = useState([])
 
     const fetchProducts = async () => {
-        setProducts(productDummyData)
-        setLoading(false)
+        try {
+            setLoading(true)
+            const token = await getToken()    
+            const res = await fetch(`/api/store/products`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data = await res.json()
+            if(data.success){
+                setProducts(data.products)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error("Failed to fetch products")
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const toggleStock = async (productId) => {
-        // Logic to toggle the stock of a product
-
-
+        try {
+            const token = await getToken()
+            const res = await fetch(`/api/store/stock-toggle`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId })
+            })
+            const data = await res.json()
+            if (data.success) {
+                fetchProducts()
+                return data.message || "Stock updated"
+            } else {
+                throw new Error(data.error || data.message || "Failed to update stock")
+            }
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
     }
 
     useEffect(() => {
@@ -71,7 +116,7 @@ export default function StoreManageProducts() {
                                 <td className="px-8 py-5">
                                     <div className="flex justify-center">
                                         <label className="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" className="sr-only peer" onChange={() => toast.promise(toggleStock(product.id), { loading: "Updating stock..." })} checked={product.inStock} />
+                                            <input type="checkbox" className="sr-only peer" onChange={() => toast.promise(toggleStock(product.id), { loading: "Updating stock...", success: (msg) => msg, error: (err) => err.message })} checked={product.inStock} />
                                             <div className="w-10 h-5 bg-slate-200 rounded-full peer peer-checked:bg-rose-600 transition-colors duration-300"></div>
                                             <span className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5 shadow-sm"></span>
                                         </label>

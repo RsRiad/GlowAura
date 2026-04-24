@@ -1,9 +1,9 @@
 'use client'
 import Link from "next/link"
-
+import { useUser, UserButton } from "@clerk/nextjs"
 const StoreNavbar = () => {
-
-
+    const { user } = useUser()
+    console.log(user)
     return (
         <div className="flex items-center justify-between px-12 py-4 glassmorphism border-b border-rose-100 shadow-sm transition-all">
             <Link href="/" className="relative text-3xl font-black text-slate-800 italic tracking-tighter group hover:scale-105 transition-all duration-500">
@@ -14,7 +14,8 @@ const StoreNavbar = () => {
             </Link>
             <div className="flex items-center gap-3 text-slate-500 font-black uppercase tracking-[0.15em] text-[10px]">
                 <p className="px-4 py-2 bg-rose-50 text-rose-600 rounded-full border border-rose-100 italic lowercase tracking-tight font-medium text-xs">private collection</p>
-                <p className="px-4 py-2 border border-slate-200 rounded-full">Hi, Seller</p>
+                <p className="px-4 py-2 border border-slate-200 rounded-full">Hi, {user?.fullName}</p>
+                <UserButton />
             </div>
         </div>
     )

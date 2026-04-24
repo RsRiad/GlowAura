@@ -13,7 +13,7 @@ export async function POST(req){
             return NextResponse.json({error: "missing details: product ID"},{status:400})
 
         }
-        const storeId = authSeller(userId);
+        const storeId = await authSeller(userId);
 
         if(!storeId){
             return NextResponse.json({error: "unauthorized"},{status:401})
@@ -35,7 +35,7 @@ export async function POST(req){
                 id: productId
             },
             data:{
-                isStock: !product.isStock
+                inStock: !product.inStock
             }
         })
 

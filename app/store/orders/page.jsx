@@ -1,24 +1,59 @@
 'use client'
 import { useEffect, useState } from "react"
 import Loading from "@/components/Loading"
-import { orderDummyData } from "@/assets/assets"
+import { useAuth } from "@clerk/nextjs"
+import axios from "axios"
+import toast from "react-hot-toast"
 
 export default function StoreOrders() {
+    const { getToken } = useAuth()
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedOrder, setSelectedOrder] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
+
 
     const fetchOrders = async () => {
-       setOrders(orderDummyData)
-       setLoading(false)
+        try {
+            setLoading(true)
+            const token = await getToken()
+            const { data } = await axios.get('/api/store/orders', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            if (data.success) {
+                setOrders(data.orders)
+            } else {
+                toast.error(data.error || "Failed to fetch orders")
+            }
+        } catch (error) {
+            console.error(error)
+            toast.error("Failed to fetch orders")
+        } finally {
+            setLoading(false)
+        }
     }
 
     const updateOrderStatus = async (orderId, status) => {
-        // Logic to update the status of an order
-
-
+        try {
+            const token = await getToken()
+            const { data } = await axios.post('/api/store/orders/status', {
+                orderId,
+                status
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            if (data.success) {
+                toast.success(data.message)
+                fetchOrders()
+            } else {
+                toast.error(data.error || "Failed to update status")
+            }
+        } catch (error) {
+            console.error(error)
+            toast.error("Failed to update status")
+        }
     }
 
     const openModal = (order) => {
@@ -72,7 +107,7 @@ export default function StoreOrders() {
                                             <span className="text-[10px] text-slate-400 uppercase tracking-widest leading-0">{order.user?.email.split('@')[0]}</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-5 font-black text-slate-800">${order.total}</td>
+                                    <td className="px-6 py-5 font-black text-slate-800">{currency}{order.total}</td>
                                     <td className="px-6 py-5 text-slate-500 uppercase text-[10px] tracking-widest font-black">{order.paymentMethod}</td>
                                     <td className="px-6 py-5 text-center">
                                         {order.isCouponUsed ? (
@@ -153,7 +188,7 @@ export default function StoreOrders() {
                                     <p className="flex justify-between"><span className="text-slate-400 font-medium">Status</span> <span className="text-amber-600 font-black uppercase tracking-widest text-[10px]">{selectedOrder.status}</span></p>
                                     <div className="pt-2 border-t border-amber-100/50 flex justify-between items-end">
                                         <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Total Paid</p>
-                                        <p className="text-2xl font-black text-slate-900 tracking-tighter">${selectedOrder.total}</p>
+                                        <p className="text-2xl font-black text-slate-900 tracking-tighter">{currency}{selectedOrder.total}</p>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +202,7 @@ export default function StoreOrders() {
                                     <div key={i} className="flex items-center gap-4 p-3 bg-white border border-rose-50 rounded-2xl hover:border-rose-200 transition-colors group">
                                         <div className="relative p-0.5 bg-gradient-to-tr from-rose-100 to-amber-50 rounded-lg group-hover:scale-105 transition-transform duration-500">
                                             <img
-                                                src={item.product.images?.[0].src || item.product.images?.[0]}
+                                                src={item.product.images?.[0]}
                                                 alt={item.product?.name}
                                                 className="w-14 h-14 object-cover rounded-md border border-white bg-white"
                                             />
@@ -177,7 +212,7 @@ export default function StoreOrders() {
                                                 <p className="text-slate-800 font-bold text-sm tracking-tight">{item.product?.name}</p>
                                                 <p className="text-[10px] text-slate-400 font-black tracking-widest uppercase">Qty: {item.quantity}</p>
                                             </div>
-                                            <p className="font-black text-rose-600">${item.price}</p>
+                                            <p className="font-black text-rose-600">{currency}{item.price}</p>
                                         </div>
                                     </div>
                                 ))}
