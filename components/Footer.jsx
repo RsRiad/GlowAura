@@ -154,12 +154,12 @@ const Footer = () => {
 
   const linkSections = [
     {
-      title: "PRODUCTS",
+      title: "CATEGORIES",
       links: [
-        { text: "Earphones", path: "/", icon: null },
-        { text: "Headphones", path: "/", icon: null },
-        { text: "Smartphones", path: "/", icon: null },
-        { text: "Laptops", path: "/", icon: null },
+        { text: "Fragrance", path: "/", icon: null },
+        { text: "Skin Care", path: "/", icon: null },
+        { text: "Hair Care", path: "/", icon: null },
+        { text: "Jewellery", path: "/", icon: null },
       ],
     },
     {

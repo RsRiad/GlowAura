@@ -71,7 +71,7 @@ const OrderSummary = ({ totalPrice, items }) => {
                     
                     {!selectedAddress ? (
                         <div className='space-y-4'>
-                            {addressList.length > 0 && (
+                            {addressList && addressList.length > 0 && (
                                 <select 
                                     className='w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none text-sm font-semibold focus:ring-2 focus:ring-rose-500/50 transition-all text-white' 
                                     onChange={(e) => setSelectedAddress(addressList[e.target.value])}

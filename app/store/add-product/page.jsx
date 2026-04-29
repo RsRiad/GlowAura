@@ -7,7 +7,7 @@ import { useAuth } from "@clerk/nextjs"
 import axios from "axios"
 export default function StoreAddProduct() {
 
-    const categories = ['Electronics', 'Clothing', 'Home & Kitchen', 'Beauty & Health', 'Toys & Games', 'Sports & Outdoors', 'Books & Media', 'Food & Drink', 'Hobbies & Crafts', 'Others']
+    const categories = ['Fragrance', 'Skin Care', 'Hair Care', 'Jewellery', 'Makeup', 'Personal Care']
 
     const [images, setImages] = useState({ 1: null, 2: null, 3: null, 4: null })
     const [productInfo, setProductInfo] = useState({
