@@ -3,14 +3,10 @@ import Image from "next/image";
 import { DotIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import Rating from "./Rating";
-import { useState } from "react";
-import RatingModal from "./RatingModal";
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, setRatingModal }) => {
 
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$';
-    const [ratingModal, setRatingModal] = useState(null);
-
     const { ratings } = useSelector(state => state.rating);
 
     return (
@@ -39,7 +35,6 @@ const OrderItem = ({ order }) => {
                                             : <button onClick={() => setRatingModal({ orderId: order.id, productId: item.product.id })} className={`text-rose-600 font-black uppercase tracking-[0.2em] text-[10px] hover:text-rose-700 transition-all transform hover:translate-x-1 ${order.status !== "DELIVERED" && 'hidden'} italic`}>Experience Review</button>
                                         }
                                     </div>
-                                    {ratingModal && <RatingModal ratingModal={ratingModal} setRatingModal={setRatingModal} />}
                                 </div>
                             </div>
                         ))}

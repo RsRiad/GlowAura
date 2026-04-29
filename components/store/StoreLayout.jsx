@@ -47,7 +47,7 @@ const StoreLayout = ({ children }) => {
   return loading ? (
     <Loading />
   ) : isSeller ? (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen" suppressHydrationWarning={true}>
       <SellerNavbar />
       <div className="flex flex-1 items-start h-full overflow-y-scroll no-scrollbar">
         <SellerSidebar storeInfo={storeInfo} />
@@ -57,7 +57,7 @@ const StoreLayout = ({ children }) => {
       </div>
     </div>
   ) : (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6" suppressHydrationWarning={true}>
       <h1 className="text-2xl sm:text-4xl font-semibold text-slate-400">
         You are not authorized to access this page
       </h1>
@@ -78,7 +78,7 @@ const StoreLayout = ({ children }) => {
 
   if (!isSignedIn) {
     return (
-      <div className="min-h-screen relative flex items-center justify-center p-6 bg-[#fff1f2] overflow-hidden">
+      <div className="min-h-screen relative flex items-center justify-center p-6 bg-[#fff1f2] overflow-hidden" suppressHydrationWarning={true}>
         {/* Background Decor */}
         <div className="aura-glow top-0 -left-20 w-[600px] h-[600px] bg-rose-200"></div>
         <div className="aura-glow -bottom-40 -right-20 w-[500px] h-[500px] bg-amber-100"></div>

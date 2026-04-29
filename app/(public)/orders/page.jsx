@@ -1,19 +1,31 @@
 'use client'
 import PageTitle from "@/components/PageTitle"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import OrderItem from "@/components/OrderItem";
-import { orderDummyData } from "@/assets/assets";
 import { ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrders } from "@/lib/features/order/orderSlice";
+import { useAuth, useUser } from "@clerk/nextjs";
+
+import { useState } from "react";
+import RatingModal from "@/components/RatingModal";
 
 export default function Orders() {
 
     const router = useRouter();
-    const [orders, setOrders] = useState([]);
+    const dispatch = useDispatch();
+    const { getToken } = useAuth();
+    const { user } = useUser();
+    const { list: orders, loading } = useSelector(state => state.order);
+
+    const [ratingModal, setRatingModal] = useState(null);
 
     useEffect(() => {
-        setOrders(orderDummyData)
-    }, []);
+        if (user) {
+            dispatch(fetchOrders({ getToken }));
+        }
+    }, [user]);
 
     return (
         <section className="min-h-screen mx-6 py-12">
@@ -34,7 +46,7 @@ export default function Orders() {
                                 </thead>
                                 <tbody>
                                     {orders.map((order) => (
-                                        <OrderItem order={order} key={order.id} />
+                                        <OrderItem order={order} key={order.id} setRatingModal={setRatingModal} />
                                     ))}
                                 </tbody>
                             </table>
@@ -53,6 +65,7 @@ export default function Orders() {
                     </div>
                 )}
             </div>
+            {ratingModal && <RatingModal ratingModal={ratingModal} setRatingModal={setRatingModal} />}
         </section>
     )
 }

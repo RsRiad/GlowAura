@@ -16,6 +16,7 @@ const PageTitle = ({ heading, text, path = "/", linkText }) => {
             {linkText && (
                 <Link 
                     href={path} 
+                    prefetch={false}
                     className="group inline-flex items-center gap-4 text-rose-600 font-black uppercase tracking-[0.2em] text-[10px] hover:text-rose-700 transition-all whitespace-nowrap"
                 >
                     {linkText}

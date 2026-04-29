@@ -12,28 +12,35 @@ export async function GET(req){
             return NextResponse.json({error: "missing details: userName"}, {status:400})
         }
 
-        //get store info
+        // get store info including products and their ratings
         const store = await prisma.store.findUnique({
-            where:{
+            where: {
                 username: userName,
                 isActive: true
             },
-            include:{
-                Product:{include:{rating:true}}
+            include: {
+                Product: {
+                    include: {
+                        rating: true
+                    }
+                }
             }
         })
-        if(!store){
-            return NextResponse.json({error: "store not found"}, {status:404})
+
+        if (!store) {
+            return NextResponse.json({ success: false, error: "Store sanctuary not found" }, { status: 404 });
         }
-        const products = await prisma.product.findMany({
-            where:{
-                storeId: store.id
-            }
-        })
-        return NextResponse.json({success: true, store: store, products: products}, {status:200})
-    }
-    catch(error){
-        console.log(error);
-        return NextResponse.json({error: error.message || error.code || "Internal server error"}, {status:400})
+
+        return NextResponse.json({ 
+            success: true, 
+            store: {
+                ...store,
+                Product: undefined // Remove it from the root store object if we return it separately
+            }, 
+            products: store.Product 
+        }, { status: 200 });
+    } catch (error) {
+        console.error("GET store data error:", error);
+        return NextResponse.json({ success: false, error: error.message || "Internal server error" }, { status: 500 });
     }
 }

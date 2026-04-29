@@ -10,15 +10,14 @@ export async function POST(req) {
         if (!userId) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
-        address.userId=userId;
         const newAddress = await prisma.address.create({
             data: {
+                ...address,
                 userId: userId,
-                address: address
             }
         });
 
-        return NextResponse.json({ success: true, message: "Address updated successfully" }, { status: 200 });
+        return NextResponse.json({ success: true, newAddress }, { status: 200 });
     } catch (error) {
         console.error("POST address error:", error);
         return NextResponse.json({ error: error.message || error.code || "Internal server error" }, { status: 500 });

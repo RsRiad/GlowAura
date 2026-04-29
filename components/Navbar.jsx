@@ -41,6 +41,7 @@ const Navbar = () => {
           <div className="hidden sm:flex items-center gap-4 lg:gap-10 text-slate-500 font-black uppercase tracking-[0.2em] text-[11px]">
             <Link
               href="/"
+              prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
               Home
@@ -48,6 +49,7 @@ const Navbar = () => {
             </Link>
             <Link
               href="/shop"
+              prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
               Collection
@@ -55,6 +57,7 @@ const Navbar = () => {
             </Link>
             <Link
               href="/"
+              prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
               About
@@ -62,6 +65,7 @@ const Navbar = () => {
             </Link>
             <Link
               href="/"
+              prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
               Contact

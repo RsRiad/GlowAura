@@ -1,12 +1,17 @@
 import { PlusIcon, SquarePenIcon, XIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import AddressModal from './AddressModal';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
+import axios from 'axios';
+import { clearCart } from '@/lib/features/cart/cartSlice';
 
 const OrderSummary = ({ totalPrice, items }) => {
 
+    const { getToken } = useAuth();
+    const dispatch = useDispatch();
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$';
     const router = useRouter();
     const addressList = useSelector(state => state.address.list);
@@ -23,7 +28,40 @@ const OrderSummary = ({ totalPrice, items }) => {
 
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
-        router.push('/orders')
+
+        if (!selectedAddress) {
+            toast.error("Please select a sanctuary for delivery");
+            return;
+        }
+
+        try {
+            const token = await getToken();
+            const { data } = await axios.post('/api/order', {
+                addressId: selectedAddress.id,
+                paymentMethod,
+                items
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (data.success) {
+                toast.success("Order initiated with Grace");
+                dispatch(clearCart());
+                
+                if (data.session) {
+                    window.location.href = data.session.url;
+                } else {
+                    router.push('/orders');
+                }
+            } else {
+                throw new Error(data.error || "Failed to place order");
+            }
+        } catch (error) {
+            console.error("Place order error:", error);
+            toast.error(error.response?.data?.message || error.message);
+        }
     }
 
     return (

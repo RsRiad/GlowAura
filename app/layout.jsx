@@ -13,18 +13,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${outfit.className} antialiased`}
-          suppressHydrationWarning
-        >
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${outfit.className} antialiased`}
+        suppressHydrationWarning
+      >
+        <ClerkProvider>
           <StoreProvider>
             <Toaster />
             {children}
           </StoreProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
