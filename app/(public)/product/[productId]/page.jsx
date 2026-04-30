@@ -32,7 +32,7 @@ export default function Product() {
             <div className="max-w-7xl mx-auto relative z-10">
 
                 {/* Breadcrums */}
-                <div className="flex items-center gap-2 text-rose-300 text-[10px] font-black uppercase tracking-[0.2em] mt-12 mb-8 italic">
+                <div className="flex items-center gap-2 text-rose-300 text-[10px] font-bold uppercase tracking-widest mt-12 mb-8">
                     <span className="text-rose-100/50">Space</span>
                     <span className="size-1 rounded-full bg-rose-200"></span>
                     <span className="text-rose-100/50">Private Selection</span>

@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
                             alt={product.name} 
                         />
                         <div className='absolute top-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-rose-100/50 shadow-sm'>
-                            <p className='text-[10px] font-black text-rose-600 uppercase tracking-widest'>{product.category}</p>
+                            <p className='text-[10px] font-bold text-rose-600 uppercase tracking-widest'>{product.category}</p>
                         </div>
                     </div>
                     
@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
                         <div className='flex items-end justify-between'>
                             <div className='flex flex-col'>
                                 <p className='text-xs text-slate-400 font-semibold line-through'>{currency}{product.mrp}</p>
-                                <p className='font-black text-slate-900 text-xl tracking-tighter italic'>{currency}{product.price}</p>
+                                <p className='font-bold text-slate-900 text-xl tracking-tight'>{currency}{product.price}</p>
                             </div>
                             <button className='bg-rose-600 text-white p-2.5 rounded-xl hover:bg-rose-700 transition-all hover:scale-110 shadow-lg shadow-rose-100 group-hover:translate-x-0 transition-transform'>
                                 <ArrowRight size={18} />

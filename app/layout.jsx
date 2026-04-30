@@ -4,7 +4,12 @@ import StoreProvider from "@/app/StoreProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
-const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
+const outfit = Outfit({ 
+  subsets: ["latin"], 
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata = {
   title: "GlowAura. - Shop smarter",
@@ -33,7 +38,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${outfit.className} antialiased`}
+        className={`${outfit.variable} ${outfit.className} antialiased`}
         suppressHydrationWarning
       >
         <ClerkProvider>

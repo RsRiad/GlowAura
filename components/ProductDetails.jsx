@@ -52,7 +52,7 @@ const ProductDetails = ({ product }) => {
             <div className="w-full lg:w-[55%] flex flex-col justify-center space-y-5 animate-soft-reveal">
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 bg-rose-600 text-white text-[8px] font-black uppercase tracking-widest rounded-full">
+                        <span className="px-2.5 py-0.5 bg-rose-600 text-white text-[8px] font-bold uppercase tracking-widest rounded-full">
                             {product.category}
                         </span>
                         <div className="flex items-center gap-1">
@@ -64,27 +64,27 @@ const ProductDetails = ({ product }) => {
                                     stroke={averageRating >= index + 1 ? "#fbbf24" : "#e2e8f0"}
                                 />
                             ))}
-                            <span className="text-[9px] font-black text-slate-400 ml-1 uppercase tracking-widest">{averageRating.toFixed(1)}</span>
+                            <span className="text-[9px] font-bold text-slate-400 ml-1 uppercase tracking-widest">{averageRating.toFixed(1)}</span>
                         </div>
                     </div>
-                    <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter leading-tight italic">
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
                         {product.name}
                     </h1>
                 </div>
 
                 <div className="flex items-baseline gap-3">
-                    <p className="text-3xl font-black text-rose-600 tracking-tighter italic">{currency}{product.price}</p>
+                    <p className="text-3xl font-bold text-rose-600 tracking-tight">{currency}{product.price}</p>
                     {product.mrp > product.price && (
-                        <p className="text-lg text-slate-300 line-through font-bold italic">{currency}{product.mrp}</p>
+                        <p className="text-lg text-slate-300 line-through font-medium">{currency}{product.mrp}</p>
                     )}
                     {product.mrp > product.price && (
-                        <span className="text-[9px] font-black text-amber-600 uppercase tracking-widest bg-amber-50 px-2 py-0.5 rounded-md">
+                        <span className="text-[9px] font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-2 py-0.5 rounded-md">
                             {((product.mrp - product.price) / product.mrp * 100).toFixed(0)}% Off
                         </span>
                     )}
                 </div>
 
-                <p className="text-slate-500 font-medium leading-relaxed line-clamp-2 text-xs italic">
+                <p className="text-slate-500 font-medium leading-relaxed line-clamp-2 text-xs">
                     {product.description}
                 </p>
 
@@ -92,13 +92,13 @@ const ProductDetails = ({ product }) => {
                     {cart[productId] && (
                         <div className="flex items-center bg-rose-50 rounded-xl p-0.5 pr-3 border border-rose-100/50">
                             <Counter productId={productId} />
-                            <span className="text-[9px] font-black uppercase tracking-widest text-rose-400 ml-3 hidden sm:block">In Cart</span>
+                            <span className="text-[9px] font-bold uppercase tracking-widest text-rose-400 ml-3 hidden sm:block">In Cart</span>
                         </div>
                     )}
                     
                     <button 
                         onClick={() => !cart[productId] ? addToCartHandler() : router.push('/cart')} 
-                        className="premium-button flex-1 py-3 text-sm font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-rose-100"
+                        className="premium-button flex-1 py-3 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-rose-100"
                     >
                         {!cart[productId] ? 'Add to Cart' : 'Checkout Now'}
                         <ArrowRightIcon size={16} />
@@ -110,13 +110,13 @@ const ProductDetails = ({ product }) => {
                         <div className="size-9 bg-rose-50 text-rose-600 flex items-center justify-center rounded-lg group-hover:bg-rose-600 group-hover:text-white transition-all">
                             <EarthIcon size={16} />
                         </div>
-                        <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">Free Shipping</p>
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">Free Shipping</p>
                     </div>
                     <div className="flex items-center gap-3 group">
                         <div className="size-9 bg-rose-50 text-rose-600 flex items-center justify-center rounded-lg group-hover:bg-rose-600 group-hover:text-white transition-all">
                             <CreditCardIcon size={16} />
                         </div>
-                        <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">Secure Payment</p>
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">Secure Payment</p>
                     </div>
                 </div>
             </div>

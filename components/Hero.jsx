@@ -20,28 +20,28 @@ const Hero = () => {
             
             <div className="relative flex-1 p-8 sm:p-14 z-10 flex flex-col justify-center">
               <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl text-rose-100 pr-5 p-2 rounded-full text-xs sm:text-sm border border-white/10 w-fit">
-                <span className="bg-rose-600 px-3 py-1 rounded-full text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-rose-600/20">
+                <span className="bg-rose-600 px-3 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-rose-600/20">
                   NEW
                 </span>
                 The Luminous Collection is here
                 <ChevronRightIcon className="group-hover:translate-x-1 transition-transform" size={16} />
               </div>
 
-              <h2 className="text-4xl sm:text-6xl lg:text-7xl leading-[1] my-8 font-black bg-gradient-to-br from-white via-rose-50 to-amber-100 bg-clip-text text-transparent italic tracking-tighter">
+              <h2 className="text-4xl sm:text-6xl lg:text-7xl leading-[1] my-8 font-bold bg-gradient-to-br from-white via-rose-50 to-amber-100 bg-clip-text text-transparent tracking-tighter">
                 Illuminate <br /> Your True <br /> Radiance.
               </h2>
 
               <div className="flex items-center gap-8 mt-4">
                 <div className="flex flex-col">
-                  <p className="uppercase tracking-[0.3em] text-[10px] text-rose-400 font-black mb-1">
+                  <p className="uppercase tracking-widest text-[10px] text-rose-400 font-bold mb-1">
                     Luxury Skincare
                   </p>
-                  <p className="text-4xl font-black italic tracking-tighter text-white">
+                  <p className="text-4xl font-bold tracking-tight text-white">
                     {currency}29.00
                   </p>
                 </div>
                 <Link href="/shop" className="premium-button group h-fit self-end mb-1 inline-flex items-center">
-                  Discover Glow
+                  Discover
                   <ArrowRightIcon className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                 </Link>
               </div>
@@ -62,10 +62,10 @@ const Hero = () => {
           <div className="flex flex-col md:flex-row xl:flex-col gap-6 w-full xl:max-w-sm transition-all duration-300">
             <div className="flex-1 flex items-center justify-between w-full bg-white rounded-[2.5rem] p-8 border border-rose-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 group animate-soft-reveal [animation-delay:200ms]">
               <div className="space-y-3">
-                <p className="text-2xl font-black text-slate-900 tracking-tighter italic">
+                <p className="text-2xl font-bold text-slate-900 tracking-tight">
                   Divine <br /> Scent
                 </p>
-                <div className="flex items-center gap-2 text-rose-600 font-black uppercase tracking-widest text-[9px] bg-rose-50 px-3 py-1.5 rounded-full w-fit">
+                <div className="flex items-center gap-2 text-rose-600 font-bold uppercase tracking-widest text-[9px] bg-rose-50 px-3 py-1.5 rounded-full w-fit">
                   Explore Now
                   <ArrowRightIcon className="group-hover:translate-x-1 transition-transform" size={12} />
                 </div>
@@ -79,13 +79,13 @@ const Hero = () => {
 
             <div className="flex-1 flex items-center justify-between w-full bg-rose-50/50 rounded-[2.5rem] p-8 border border-rose-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 group animate-soft-reveal [animation-delay:400ms]">
               <div className="space-y-3">
-                <p className="text-2xl font-black text-rose-950 tracking-tighter italic">
+                <p className="text-2xl font-bold text-slate-900 tracking-tight">
                   Pure <br /> Rituals
                 </p>
-                <p className="text-rose-600/70 font-bold text-base italic">
+                <p className="text-rose-600/70 font-semibold text-base">
                   Up to 30% Off
                 </p>
-                <div className="flex items-center gap-2 text-white font-black uppercase tracking-widest text-[9px] bg-rose-600 px-3 py-1.5 rounded-full w-fit">
+                <div className="flex items-center gap-2 text-white font-bold uppercase tracking-widest text-[9px] bg-rose-600 px-3 py-1.5 rounded-full w-fit">
                   Claim Deal
                   <ArrowRightIcon className="group-hover:translate-x-1 transition-transform" size={12} />
                 </div>

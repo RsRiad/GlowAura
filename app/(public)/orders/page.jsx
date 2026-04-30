@@ -28,20 +28,20 @@ export default function Orders() {
     }, [user]);
 
     return (
-        <section className="min-h-screen mx-6 py-10 animate-soft-reveal">
-            <div className="max-w-7xl mx-auto">
+        <section className="min-h-screen mx-6 py-8 animate-soft-reveal">
+            <div className="max-w-6xl mx-auto">
                 {orders.length > 0 ? (
-                    <div className="space-y-8">
-                        <PageTitle heading="Order History" text="Your collection of premium acquisitions." linkText="Keep Exploring" />
+                    <div className="space-y-6">
+                        <PageTitle heading="Orders" text="Your collection of premium acquisitions." linkText="Keep Exploring" />
 
-                        <div className="bg-white rounded-[2.5rem] border border-rose-100/30 p-6 shadow-sm overflow-x-auto">
-                            <table className="w-full text-left border-separate border-spacing-y-3">
+                        <div className="bg-white rounded-3xl border border-rose-100/20 p-4 shadow-sm overflow-x-auto">
+                            <table className="w-full text-left border-separate border-spacing-y-1.5">
                                 <thead className="animate-soft-reveal">
-                                    <tr className="max-sm:text-sm text-slate-400 font-black uppercase tracking-widest text-[9px]">
-                                        <th className="pb-4 px-4 italic">Order</th>
-                                        <th className="pb-4 text-center italic">Total</th>
-                                        <th className="pb-4 text-left italic">Delivery</th>
-                                        <th className="pb-4 text-left italic">Status</th>
+                                    <tr className="max-sm:text-sm text-slate-400 font-bold uppercase tracking-widest text-[8px]">
+                                        <th className="pb-3 px-3">Acquisition</th>
+                                        <th className="pb-3 text-center">Investment</th>
+                                        <th className="pb-3 text-left">Destination</th>
+                                        <th className="pb-3 text-left">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,8 +57,8 @@ export default function Orders() {
                         <div className="size-24 bg-rose-50/50 rounded-full flex items-center justify-center text-rose-200 mb-8 border border-rose-100/50 shadow-inner">
                             <ShoppingCart size={40} className="animate-float" />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter italic mb-4">No Orders Yet</h1>
-                        <p className="text-slate-500 font-semibold italic text-base mb-8">Your procurement history will appear here.</p>
+                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tighter mb-4">No Orders Yet</h1>
+                        <p className="text-slate-500 font-medium text-base mb-8">Your procurement history will appear here.</p>
                         <button onClick={() => router.push('/shop')} className="premium-button px-10 py-4 text-base">
                              Start Shopping
                         </button>

@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="px-8 flex items-center justify-between py-4 transition-all">
           <Link
             href="/"
-            className="relative text-3xl font-black text-slate-800 italic tracking-tighter group hover:scale-105 transition-all duration-500"
+            className="relative text-3xl font-bold text-slate-800 tracking-tighter group hover:scale-105 transition-all duration-500"
           >
             <span className="text-rose-600 group-hover:text-rose-500 transition-colors">
               Glow
@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden sm:flex items-center gap-4 lg:gap-10 text-slate-500 font-black uppercase tracking-[0.2em] text-[11px]">
+          <div className="hidden sm:flex items-center gap-4 lg:gap-10 text-slate-500 font-semibold uppercase tracking-widest text-[11px]">
             <Link
               href="/"
               prefetch={false}
@@ -95,11 +95,11 @@ const Navbar = () => {
                 size={20}
                 className="group-hover:scale-110 transition-transform"
               />
-              <span className="hidden lg:inline italic lowercase tracking-tight font-medium text-xs">
+              <span className="hidden lg:inline lowercase tracking-tight font-medium text-xs">
                 cart
               </span>
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-2 text-[10px] font-black text-white bg-rose-600 size-5 flex items-center justify-center rounded-full ring-2 ring-white animate-pulse">
+                <span className="absolute -top-1.5 -right-2 text-[10px] font-bold text-white bg-rose-600 size-5 flex items-center justify-center rounded-full ring-2 ring-white animate-pulse">
                   {cartCount}
                 </span>
               )}
@@ -108,7 +108,7 @@ const Navbar = () => {
             <Show when="signed-out">
               <button
                 onClick={openSignIn}
-                className="premium-button py-3 px-10 text-[10px] tracking-[0.2em] font-black uppercase"
+                className="premium-button py-3 px-10 text-[10px] tracking-widest font-bold uppercase"
               >
                 Sign In
               </button>
@@ -139,14 +139,14 @@ const Navbar = () => {
             >
               <ShoppingCart size={22} />
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-2 text-[10px] font-black text-white bg-rose-600 size-4 flex items-center justify-center rounded-full">
+                <span className="absolute -top-1.5 -right-2 text-[10px] font-bold text-white bg-rose-600 size-4 flex items-center justify-center rounded-full">
                   {cartCount}
                 </span>
               )}
             </Link>
             
             <Show when="signed-out">
-              <button onClick={openSignIn} className="premium-button py-2 px-6 text-[10px] tracking-widest font-black uppercase">
+              <button onClick={openSignIn} className="premium-button py-2 px-6 text-[10px] tracking-widest font-bold uppercase">
                 Login
               </button>
             </Show>

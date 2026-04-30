@@ -194,10 +194,10 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12 animate-reveal">
             <div className="col-span-1 lg:col-span-1 space-y-8">
-              <Link href="/" className="relative text-3xl font-black text-slate-800 italic tracking-tighter group transition-all duration-500 hover:scale-105 inline-block">
+              <Link href="/" className="relative text-3xl font-bold text-slate-800 tracking-tighter group transition-all duration-500 hover:scale-105 inline-block">
                 <span className="text-rose-600">Glow</span>Aura<span className="text-rose-600 text-4xl">.</span>
               </Link>
-              <p className="text-slate-500 text-sm leading-relaxed max-w-xs font-medium italic">
+              <p className="text-slate-500 text-sm leading-relaxed max-w-xs font-medium">
                 Redefining the essence of grace. Curated innovations for those who seek beauty in every detail.
               </p>
               <div className="flex items-center gap-5">
@@ -215,7 +215,7 @@ const Footer = () => {
 
             {linkSections.map((section, index) => (
               <div key={index} className="space-y-8">
-                <h3 className="text-rose-950 font-black text-[10px] uppercase tracking-[0.3em] italic">
+                <h3 className="text-slate-900 font-bold text-[10px] uppercase tracking-widest">
                   {section.title}
                 </h3>
                 <ul className="space-y-4">
@@ -223,7 +223,7 @@ const Footer = () => {
                     <li key={i}>
                       <Link
                         href={link.path}
-                        className="text-slate-500 hover:text-rose-600 text-sm font-semibold italic transition-colors flex items-center gap-3 group"
+                        className="text-slate-500 hover:text-rose-600 text-sm font-medium transition-colors flex items-center gap-3 group"
                       >
                         {link.icon && <span className="text-rose-100 group-hover:text-rose-600 transition-colors"><link.icon /></span>}
                         {link.text}
@@ -239,7 +239,7 @@ const Footer = () => {
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
               © {new Date().getFullYear()} GlowAura Artisan Sanctuary. All rights reserved.
             </p>
-            <div className="flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-rose-200">
+            <div className="flex gap-10 text-[10px] font-bold uppercase tracking-widest text-rose-200">
               <Link href="/" className="hover:text-rose-600 transition-colors">Privacy Privacy</Link>
               <Link href="/" className="hover:text-rose-600 transition-colors">Grace of Service</Link>
               <Link href="/" className="hover:text-rose-600 transition-colors">Silk Policy</Link>
