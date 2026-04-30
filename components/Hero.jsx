@@ -2,100 +2,98 @@
 import { assets } from "@/assets/assets";
 import { ArrowRightIcon, ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import CategoriesMarquee from "./CategoriesMarquee";
 import HydrationGuard from "./HydrationGuard";
 
 const Hero = () => {
-  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || "৳";
+  const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || "$";
 
   return (
     <HydrationGuard>
       <div className="mx-6">
         <div className="flex max-xl:flex-col gap-10 max-w-7xl mx-auto mt-8 mb-2">
           {/* ... existing hero code ... */}
-          <div className="relative xl:flex-[1.4] flex flex-col bg-rose-950 rounded-[3rem] xl:min-h-[460px] group overflow-hidden animate-reveal">
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 via-amber-500/5 to-transparent pointer-events-none"></div>
-            <div className="relative p-6 sm:p-12 z-10">
-              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md text-rose-200 pr-5 p-1.5 rounded-full text-xs sm:text-sm border border-white/5">
-                <span className="bg-rose-600 px-3 py-1 ml-1 rounded-full text-white text-[10px] font-bold uppercase tracking-widest">
+          <div className="relative xl:flex-[1.4] flex max-md:flex-col bg-rose-950 rounded-[3rem] xl:min-h-[500px] group overflow-hidden animate-soft-reveal shadow-2xl shadow-rose-900/20">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(244,63,94,0.15),transparent)] pointer-events-none"></div>
+            
+            <div className="relative flex-1 p-8 sm:p-14 z-10 flex flex-col justify-center">
+              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl text-rose-100 pr-5 p-2 rounded-full text-xs sm:text-sm border border-white/10 w-fit">
+                <span className="bg-rose-600 px-3 py-1 rounded-full text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-rose-600/20">
                   NEW
                 </span>
-                Ethereal Collection & Complimentary Shipping{" "}
-                <ChevronRightIcon
-                  className="group-hover:translate-x-1 transition-transform"
-                  size={16}
-                />
+                The Luminous Collection is here
+                <ChevronRightIcon className="group-hover:translate-x-1 transition-transform" size={16} />
               </div>
-              <h2 className="text-4xl sm:text-6xl leading-[1.1] my-8 font-black bg-gradient-to-r from-white via-rose-100 to-amber-200 bg-clip-text text-transparent max-w-xl italic tracking-tighter">
-                Glow with Unrivaled Grace & Elegance.
+
+              <h2 className="text-4xl sm:text-6xl lg:text-7xl leading-[1] my-8 font-black bg-gradient-to-br from-white via-rose-50 to-amber-100 bg-clip-text text-transparent italic tracking-tighter">
+                Illuminate <br /> Your True <br /> Radiance.
               </h2>
-              <div className="text-rose-100/80 text-sm font-medium mt-4 sm:mt-6 flex flex-col gap-1">
-                <p className="uppercase tracking-[0.3em] text-[10px] text-rose-400 font-black">
-                  Artisan Curated
-                </p>
-                <p className="text-5xl font-black italic tracking-tighter">
-                  {currency}4.90
-                </p>
+
+              <div className="flex items-center gap-8 mt-4">
+                <div className="flex flex-col">
+                  <p className="uppercase tracking-[0.3em] text-[10px] text-rose-400 font-black mb-1">
+                    Luxury Skincare
+                  </p>
+                  <p className="text-4xl font-black italic tracking-tighter text-white">
+                    {currency}29.00
+                  </p>
+                </div>
+                <Link href="/shop" className="premium-button group h-fit self-end mb-1 inline-flex items-center">
+                  Discover Glow
+                  <ArrowRightIcon className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                </Link>
               </div>
-              <button className="premium-button mt-6 sm:mt-8 group">
-                Discover the Glow
-                <ArrowRightIcon
-                  className="inline-block ml-2 group-hover:translate-x-1 transition-transform"
-                  size={18}
-                />
-              </button>
             </div>
-            <div className="absolute bottom-0 right-0 md:right-12 w-full sm:max-w-md hidden sm:block animate-float">
+
+            <div className="relative flex-1 min-h-[350px] md:min-h-full">
+              <div className="absolute inset-0 bg-gradient-to-r from-rose-950 via-transparent to-transparent z-10 md:block hidden"></div>
               <Image
-                className="group-hover:scale-110 transition-transform duration-1000"
+                className="object-cover object-center transition-transform duration-1000"
                 src={assets.hero_model_img}
-                alt="Premium Gadgets"
+                alt="Ethereal Beauty"
+                fill
                 priority
               />
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row xl:flex-col gap-6 w-full xl:max-w-xs transition-all duration-300">
-            <div className="flex-1 flex items-center justify-between w-full bg-white rounded-[2.5rem] p-10 border border-rose-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-reveal [animation-delay:200ms]">
-              <div className="space-y-4">
-                <p className="text-3xl font-black text-slate-900 tracking-tighter italic">
-                  Luxe Essentials
+          <div className="flex flex-col md:flex-row xl:flex-col gap-6 w-full xl:max-w-sm transition-all duration-300">
+            <div className="flex-1 flex items-center justify-between w-full bg-white rounded-[2.5rem] p-8 border border-rose-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 group animate-soft-reveal [animation-delay:200ms]">
+              <div className="space-y-3">
+                <p className="text-2xl font-black text-slate-900 tracking-tighter italic">
+                  Divine <br /> Scent
                 </p>
-                <p className="flex items-center gap-2 text-rose-600 font-black uppercase tracking-widest text-[10px] group-hover:text-rose-700 transition-colors">
-                  Signature Series{" "}
-                  <ArrowRightIcon
-                    className="group-hover:translate-x-1 transition-transform"
-                    size={14}
-                  />
-                </p>
+                <div className="flex items-center gap-2 text-rose-600 font-black uppercase tracking-widest text-[9px] bg-rose-50 px-3 py-1.5 rounded-full w-fit">
+                  Explore Now
+                  <ArrowRightIcon className="group-hover:translate-x-1 transition-transform" size={12} />
+                </div>
               </div>
               <Image
-                className="w-32 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-700 animate-float"
+                className="w-28 group-hover:-rotate-6 transition-all duration-1000 animate-float"
                 src={assets.hero_product_img1}
-                alt="Essentials"
+                alt="Fragrance"
               />
             </div>
-            <div className="flex-1 flex items-center justify-between w-full bg-rose-50/50 rounded-[2.5rem] p-10 border border-rose-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-reveal [animation-delay:400ms]">
-              <div className="space-y-4">
-                <p className="text-3xl font-black text-rose-950 tracking-tighter italic">
-                  Exclusive Offers
+
+            <div className="flex-1 flex items-center justify-between w-full bg-rose-50/50 rounded-[2.5rem] p-8 border border-rose-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 group animate-soft-reveal [animation-delay:400ms]">
+              <div className="space-y-3">
+                <p className="text-2xl font-black text-rose-950 tracking-tighter italic">
+                  Pure <br /> Rituals
                 </p>
-                <p className="text-rose-600/70 font-bold text-lg italic">
-                  Save 20% on Grace
+                <p className="text-rose-600/70 font-bold text-base italic">
+                  Up to 30% Off
                 </p>
-                <p className="flex items-center gap-2 text-rose-700 font-black uppercase tracking-widest text-[10px] group-hover:text-amber-600 transition-colors">
-                  Access Benefit{" "}
-                  <ArrowRightIcon
-                    className="group-hover:translate-x-1 transition-transform"
-                    size={14}
-                  />
-                </p>
+                <div className="flex items-center gap-2 text-white font-black uppercase tracking-widest text-[9px] bg-rose-600 px-3 py-1.5 rounded-full w-fit">
+                  Claim Deal
+                  <ArrowRightIcon className="group-hover:translate-x-1 transition-transform" size={12} />
+                </div>
               </div>
               <Image
-                className="w-32 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 animate-float [animation-delay:1s]"
+                className="w-28 group-hover:rotate-6 transition-all duration-1000 animate-float [animation-delay:1s]"
                 src={assets.hero_product_img2}
-                alt="Offers"
+                alt="Skincare"
               />
             </div>
           </div>

@@ -56,7 +56,7 @@ const Navbar = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-500 group-hover:w-full"></span>
             </Link>
             <Link
-              href="/"
+              href="/about"
               prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
@@ -64,7 +64,7 @@ const Navbar = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-500 group-hover:w-full"></span>
             </Link>
             <Link
-              href="/"
+              href="/contact"
               prefetch={false}
               className="hover:text-rose-600 transition-all relative group"
             >
@@ -96,7 +96,7 @@ const Navbar = () => {
                 className="group-hover:scale-110 transition-transform"
               />
               <span className="hidden lg:inline italic lowercase tracking-tight font-medium text-xs">
-                private collection
+                cart
               </span>
               {cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-2 text-[10px] font-black text-white bg-rose-600 size-5 flex items-center justify-center rounded-full ring-2 ring-white animate-pulse">

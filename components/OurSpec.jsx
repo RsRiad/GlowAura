@@ -8,7 +8,7 @@ const OurSpecs = () => {
 
     return (
         <HydrationGuard>
-            <section className='px-6 my-24 max-w-7xl mx-auto'>
+            <section className='px-6 my-12 max-w-7xl mx-auto'>
                 <Title 
                     title='GlowAura Standard' 
                     description="We redefine excellence. Enjoy a shopping experience crafted for enthusiasts, by enthusiasts." 

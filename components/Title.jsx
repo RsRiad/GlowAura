@@ -5,12 +5,12 @@ import React from 'react'
 
 const Title = ({ title, description, href }) => {
     return (
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 animate-reveal">
-            <div className="space-y-3 text-left w-full">
-                <h2 className="text-4xl md:text-6xl font-black text-rose-950 tracking-tighter italic">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 animate-reveal">
+            <div className="space-y-2 text-left w-full">
+                <h2 className="text-3xl md:text-5xl font-black text-rose-950 tracking-tighter italic">
                     {title}
                 </h2>
-                <p className="text-slate-500 font-semibold max-w-xl italic">
+                <p className="text-slate-500 font-semibold max-w-xl italic text-sm">
                     {description}
                 </p>
             </div>

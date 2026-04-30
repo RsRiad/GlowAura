@@ -9,11 +9,13 @@ const isPublicRoute = createRouteMatcher([
   '/api/inngest(.*)',    // Allow Inngest through without auth
 ]);
 
-export default clerkMiddleware(async (auth, req) => {
+export const proxy = clerkMiddleware(async (auth, req) => {
   if (!isPublicRoute(req)) {
     await auth.protect();
   }
 });
+
+export default proxy;
 
 export const config = {
   matcher: [

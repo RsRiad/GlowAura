@@ -28,20 +28,20 @@ export default function Orders() {
     }, [user]);
 
     return (
-        <section className="min-h-screen mx-6 py-12">
+        <section className="min-h-screen mx-6 py-10 animate-soft-reveal">
             <div className="max-w-7xl mx-auto">
                 {orders.length > 0 ? (
-                    <div className="space-y-12">
-                        <PageTitle heading="Orders History" text="Your exclusive procurement history." linkText="Keep Exploring" />
+                    <div className="space-y-8">
+                        <PageTitle heading="Order History" text="Your collection of premium acquisitions." linkText="Keep Exploring" />
 
-                        <div className="bg-white rounded-[4rem] border border-rose-100/30 p-10 shadow-[0_30px_100px_-15px_rgba(244,63,94,0.05)] overflow-x-auto animate-reveal [animation-delay:400ms]">
-                            <table className="w-full text-left border-separate border-spacing-y-6">
-                                <thead className="animate-reveal [animation-delay:200ms]">
-                                    <tr className="max-sm:text-sm text-rose-300 font-black uppercase tracking-[0.3em] text-[10px]">
-                                        <th className="pb-6 px-6 italic">Artisan Acquisition</th>
-                                        <th className="pb-6 text-center italic">Sanctuary Investment</th>
-                                        <th className="pb-6 text-left italic">Graceful Destination</th>
-                                        <th className="pb-6 text-left italic">Current State</th>
+                        <div className="bg-white rounded-[2.5rem] border border-rose-100/30 p-6 shadow-sm overflow-x-auto">
+                            <table className="w-full text-left border-separate border-spacing-y-3">
+                                <thead className="animate-soft-reveal">
+                                    <tr className="max-sm:text-sm text-slate-400 font-black uppercase tracking-widest text-[9px]">
+                                        <th className="pb-4 px-4 italic">Order</th>
+                                        <th className="pb-4 text-center italic">Total</th>
+                                        <th className="pb-4 text-left italic">Delivery</th>
+                                        <th className="pb-4 text-left italic">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,14 +53,14 @@ export default function Orders() {
                         </div>
                     </div>
                 ) : (
-                    <div className="min-h-[80vh] flex flex-col items-center justify-center text-center animate-reveal">
-                        <div className="size-36 bg-rose-50/50 rounded-full flex items-center justify-center text-rose-200 mb-12 border border-rose-100/50 shadow-inner">
-                            <ShoppingCart size={56} className="animate-float" />
+                    <div className="min-h-[70vh] flex flex-col items-center justify-center text-center animate-soft-reveal">
+                        <div className="size-24 bg-rose-50/50 rounded-full flex items-center justify-center text-rose-200 mb-8 border border-rose-100/50 shadow-inner">
+                            <ShoppingCart size={40} className="animate-float" />
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-black text-rose-950 tracking-tighter italic mb-6">No Graceful Acquisitions</h1>
-                        <p className="text-slate-500 font-semibold italic text-lg mb-12">Begin your ethereal collection today.</p>
-                        <button onClick={() => router.push('/shop')} className="premium-button px-14 py-5 text-lg">
-                             Start Discovering
+                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter italic mb-4">No Orders Yet</h1>
+                        <p className="text-slate-500 font-semibold italic text-base mb-8">Your procurement history will appear here.</p>
+                        <button onClick={() => router.push('/shop')} className="premium-button px-10 py-4 text-base">
+                             Start Shopping
                         </button>
                     </div>
                 )}

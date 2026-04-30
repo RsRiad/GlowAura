@@ -11,10 +11,12 @@ export default function LoadingPage() {
         const params = new URLSearchParams(window.location.search)
         const url = params.get('nextUrl')
 
-        if (url) {
+        if (url && url.startsWith('/') && !url.includes('://')) {
             setTimeout(() => {
                 router.push(url)
-            }, 8000)
+            }, 5000) // Reduced to 5s for better UX, still safe
+        } else {
+            router.push('/')
         }
     }, [router])
 

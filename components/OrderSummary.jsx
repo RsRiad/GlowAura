@@ -1,3 +1,4 @@
+'use client'
 import { PlusIcon, SquarePenIcon, XIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import AddressModal from './AddressModal';

@@ -12,10 +12,10 @@ const LatestProducts = () => {
 
     return (
         <HydrationGuard>
-            <section className='px-6 my-24 max-w-7xl mx-auto'>
+            <section className='px-6 my-12 max-w-7xl mx-auto'>
                 <Title 
-                    title='Newly Unveiled' 
-                    description='Discover the latest additions to our premium collection, where innovation meets elegance.' 
+                    title='New Arrivals' 
+                    description='Explore our latest premium arrivals, curated for your radiant glow.' 
                     href='/shop' 
                 />
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>

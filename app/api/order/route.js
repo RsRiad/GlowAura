@@ -53,6 +53,12 @@ export async function POST(req) {
             orders.push(order);
         }
 
+        // Clear user's cart in DB
+        await prisma.user.update({
+            where: { id: userId },
+            data: { cart: {} }
+        });
+
         if (paymentMethod === 'STRIPE') {
             const origin = req.headers.get("origin")
             const checkoutSession = await stripe.checkout.sessions.create({
@@ -78,12 +84,6 @@ export async function POST(req) {
             })
             return NextResponse.json({ success: true, session: checkoutSession });
         }
-
-        // Clear user's cart in DB for non-stripe (COD) payments
-        await prisma.user.update({
-            where: { id: userId },
-            data: { cart: {} }
-        });
 
         return NextResponse.json({ success: true, orders }, { status: 201 });
     } catch (error) {

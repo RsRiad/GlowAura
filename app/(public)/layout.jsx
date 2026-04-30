@@ -26,14 +26,14 @@ export default function PublicLayout({ children }) {
     }, [user]);
     
     useEffect(() => {
-        if (isCartLoaded && user && cartItems && Object.keys(cartItems).length > 0) {
+        if (isCartLoaded && user && cartItems) {
             dispatch(uploadCart({ getToken, cartItems }));
         }
     }, [cartItems, isCartLoaded, user]);
 
     return (
         <>
-            <Banner />
+            {/* <Banner /> */}
             <Navbar />
             {children}
             <Footer />

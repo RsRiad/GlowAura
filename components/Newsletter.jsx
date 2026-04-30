@@ -6,11 +6,11 @@ import HydrationGuard from './HydrationGuard'
 const Newsletter = () => {
     return (
         <HydrationGuard>
-            <section className='px-6 my-32 max-w-7xl mx-auto'>
+            <section className='px-6 my-12 max-w-7xl mx-auto'>
                 <div className='relative bg-rose-950 rounded-[3.5rem] p-12 md:p-24 overflow-hidden text-center animate-reveal'>
                     <div className='absolute inset-0 bg-gradient-to-tr from-rose-600/20 via-amber-500/5 to-transparent opacity-50'></div>
                     <div className='relative z-10 max-w-2xl mx-auto'>
-                        <h2 className='text-3xl md:text-6xl font-black text-white mb-6 tracking-tighter italic'>Stay in the Glow.</h2>
+                        <h2 className='text-3xl md:text-5xl font-black text-white mb-6 tracking-tighter italic'>Stay in the Glow.</h2>
                         <p className='text-rose-100/70 font-medium mb-12 text-sm md:text-base leading-relaxed italic'>
                             Join our exclusive sanctuary to receive early access to ethereal collection drops, artisan deals, and the latest innovations delivered with grace.
                         </p>
