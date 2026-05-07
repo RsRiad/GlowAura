@@ -7,6 +7,13 @@ const isPublicRoute = createRouteMatcher([
   '/store(.*)',          // Auth handled client-side in StoreLayout
   '/api/webhooks(.*)',   // Allow Clerk webhooks through without auth
   '/api/inngest(.*)',    // Allow Inngest through without auth
+  '/api/products(.*)',
+  '/product(.*)',
+  '/shop(.*)',
+  '/cart(.*)',
+  '/contact(.*)',
+  '/about(.*)',
+  '/pricing(.*)',
 ]);
 
 export const proxy = clerkMiddleware(async (auth, req) => {
